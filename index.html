@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Password Generator</title>
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            width: 350px;
+            padding: 20px;
+            margin: 100px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        #result {
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Smart Password Generator</h2>
+
+    <label>Enter Username:</label><br>
+    <input type="text" id="username" placeholder="Enter username"><br>
+
+    <label>What is your favourite thing?</label><br>
+    <input type="text" id="favorite" placeholder="Pet name, movie, place..."><br>
+
+    <button onclick="generatePassword()">Generate Password</button>
+
+    <h3>Your Strong Password:</h3>
+    <p id="result"></p>
+</div>
+
+<!-- Internal JavaScript -->
+<script>
+    function generatePassword() {
+
+        let username = document.getElementById("username").value.trim();
+        let favorite = document.getElementById("favorite").value.trim();
+
+        if (username === "" || favorite === "") {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        username = username.charAt(0).toUpperCase() + username.slice(1);
+        favorite = favorite.charAt(0).toUpperCase() + favorite.slice(1);
+
+        let randomNumber = Math.floor(100 + Math.random() * 900);
+        let symbols = ["@", "#", "$", "%", "&", "!"];
+        let randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+
+        let password = username + randomSymbol + favorite + randomNumber;
+
+        document.getElementById("result").innerText = password;
+    }
+</script>
+
+</body>
+</html>
